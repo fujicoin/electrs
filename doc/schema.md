@@ -28,4 +28,4 @@ In order to save storage space, we store the full transaction IDs once, and use 
 | `b'T'` | `txid` (32 bytes) |   | `uint32`           |
 
 Note that this mapping allows us to use `getrawtransaction` RPC to retrieve actual transaction data from without `-txindex` enabled
-(by explicitly specifying the [blockhash](https://github.com/bitcoin/bitcoin/commit/497d0e014cc79d46531d570e74e4aeae72db602d)).
+(by explicitly specifying the [blockhash](https://github.com/fujicoin/fujicoin/commit/497d0e014cc79d46531d570e74e4aeae72db602d)).

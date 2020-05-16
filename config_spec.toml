@@ -3,9 +3,9 @@ env_prefix = "ELECTRS"
 conf_file_param = "conf"
 conf_dir_param = "conf_dir"
 doc = """
-An efficient re-implementation of Electrum Server, inspired by ElectrumX, Electrum Personal Server and bitcoincore-indexd.
+An efficient re-implementation of Electrum Server, inspired by ElectrumX, Electrum Personal Server and fujicoincore-indexd.
 
-The motivation behind this project is to enable a user to run his own Electrum server, with required hardware resources not much beyond those of a full node. The server indexes the entire Bitcoin blockchain, and the resulting index enables fast queries for any given user wallet, allowing the user to keep real-time track of his balances and his transaction history using the Electrum wallet. Since it runs on the user's own machine, there is no need for the wallet to communicate with external Electrum servers, thus preserving the privacy of the user's addresses and balances."""
+The motivation behind this project is to enable a user to run his own Electrum server, with required hardware resources not much beyond those of a full node. The server indexes the entire Fujicoin blockchain, and the resulting index enables fast queries for any given user wallet, allowing the user to keep real-time track of his balances and his transaction history using the Electrum wallet. Since it runs on the user's own machine, there is no need for the wallet to communicate with external Electrum servers, thus preserving the privacy of the user's addresses and balances."""
 
 [[switch]]
 name = "verbose"
@@ -26,7 +26,7 @@ default = "\"./db\".into()"
 [[param]]
 name = "daemon_dir"
 type = "std::path::PathBuf"
-doc = "Data directory of Bitcoind (default: ~/.bitcoin/)"
+doc = "Data directory of Fujicoind (default: ~/.fujicoin/)"
 default = "crate::config::default_daemon_dir()"
 
 [[param]]
@@ -40,14 +40,14 @@ env_var = false
 [[param]]
 name = "cookie_file"
 type = "std::path::PathBuf"
-doc = "JSONRPC authentication cookie file (default: ~/.bitcoin/.cookie)"
+doc = "JSONRPC authentication cookie file (default: ~/.fujicoin/.cookie)"
 # This is safe to configure on command line.
 
 [[param]]
 name = "network"
-type = "crate::config::BitcoinNetwork"
-convert_into = "::bitcoin::network::constants::Network"
-doc = "Select Bitcoin network type ('bitcoin', 'testnet' or 'regtest')"
+type = "crate::config::FujicoinNetwork"
+convert_into = "::fujicoin::network::constants::Network"
+doc = "Select Fujicoin network type ('fujicoin', 'testnet' or 'regtest')"
 default = "Default::default()"
 
 [[param]]
@@ -58,7 +58,7 @@ doc = "Electrum server JSONRPC 'addr:port' to listen on (default: '127.0.0.1:500
 [[param]]
 name = "daemon_rpc_addr"
 type = "crate::config::ResolvAddr"
-doc = "Bitcoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:8332 for mainnet, 127.0.0.1:18332 for testnet and 127.0.0.1:18443 for regtest)"
+doc = "Fujicoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:8332 for mainnet, 127.0.0.1:18332 for testnet and 127.0.0.1:18443 for regtest)"
 
 [[param]]
 name = "monitoring_addr"
@@ -72,7 +72,7 @@ doc = "Use JSONRPC instead of directly importing blk*.dat files. Useful for remo
 [[param]]
 name = "index_batch_size"
 type = "usize"
-doc = "Number of blocks to get in one JSONRPC request from bitcoind"
+doc = "Number of blocks to get in one JSONRPC request from fujicoind"
 default = "100"
 
 [[param]]

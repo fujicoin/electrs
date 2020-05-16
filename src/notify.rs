@@ -1,11 +1,11 @@
 // TODO: network::socket::Socket needs to be reimplemented.
 
-use bitcoin::network::constants::Network;
-use bitcoin::network::message::NetworkMessage;
-use bitcoin::network::message_blockdata::InvType;
-use bitcoin::network::socket::Socket;
-use bitcoin::hash_types::Txid;
-use bitcoin::util::Error;
+use fujicoin::network::constants::Network;
+use fujicoin::network::message::NetworkMessage;
+use fujicoin::network::message_blockdata::InvType;
+use fujicoin::network::socket::Socket;
+use fujicoin::hash_types::Txid;
+use fujicoin::util::Error;
 
 use std::sync::mpsc::Sender;
 use std::thread;
@@ -14,7 +14,7 @@ use std::time::Duration;
 use crate::util;
 
 fn connect() -> Result<Socket, Error> {
-    let mut sock = Socket::new(Network::Bitcoin);
+    let mut sock = Socket::new(Network::Fujicoin);
     sock.connect("127.0.0.1", 8333)?;
     Ok(sock)
 }
