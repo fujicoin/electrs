@@ -197,9 +197,9 @@ impl Config {
         config.db_dir.push(db_subdir);
 
         let default_daemon_port = match config.network {
-            Network::Fujicoin => 8332,
-            Network::Testnet => 18332,
-            Network::Regtest => 18443,
+            Network::Fujicoin => 3776,
+            Network::Testnet => 13776,
+            Network::Regtest => 16776,
         };
         let default_electrum_port = match config.network {
             Network::Fujicoin => 50001,
