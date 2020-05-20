@@ -2,6 +2,7 @@
 
 It is possible to build manually in Debian 10.
 However, compilation of rocksdb does not succeed on Ubuntu 18.04, 20.04.
+So, Docker-based installation is highly recommended.
 
 ## Manual installation from source
 
@@ -42,11 +43,21 @@ $ docker run --network host \
              --volume $HOME/.fujicoin:/home/user/.fujicoin:ro \
              --volume $PWD:/home/user \
              --rm -i -t electrs-app \
-             electrs -vvvv --timestamp --db-dir /home/user/db
+             electrs -vvv --timestamp --db-dir /home/user/db
 ```
 
-Create `./db` in advance and set the access rights appropriately.
-Create `./electrs.toml` and set`cookie="USER:PASSWORD"`.
+* Create `.electrs/config.toml` and set`cookie="USER:PASSWORD"`.
+* When fujicoind is operated as root, it is necessary to unify it with root for both compilation and execution. Use `Dockerfile_for_root`.
+
+```bash
+$ docker build -t electrs-app .
+$ docker run --network host \
+             --volume /root/.fujicoin:/root/.fujicoin:ro \
+             --volume $PWD:/root \
+             --rm -u root -i -t electrs-app \
+             electrs -vvv --timestamp --db-dir /root/db
+```
+
 
 ## Native OS packages
 
