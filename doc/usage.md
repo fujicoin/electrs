@@ -1,6 +1,6 @@
 ## Docker-based installation is highly recommended
 
-It is possible to build manually in Debian 10.
+It is possible to build manually in Debian 10 or Ubuntu 20.04.
 However, compilation of rocksdb does not succeed on Ubuntu 18.04, 20.04.
 So, Docker-based installation is highly recommended.
 
