@@ -1,5 +1,5 @@
-use bitcoin::blockdata::block::BlockHeader;
-use bitcoin::hash_types::BlockHash;
+use fujicoin::blockdata::block::BlockHeader;
+use fujicoin::hash_types::BlockHash;
 use std::collections::HashMap;
 use std::convert::TryInto;
 use std::fmt;
@@ -11,7 +11,7 @@ use std::thread;
 pub type Bytes = Vec<u8>;
 pub type HeaderMap = HashMap<BlockHash, BlockHeader>;
 
-// TODO: consolidate serialization/deserialize code for bincode/bitcoin.
+// TODO: consolidate serialization/deserialize code for bincode/fujicoin.
 const HASH_LEN: usize = 32;
 pub const HASH_PREFIX_LEN: usize = 8;
 
@@ -282,9 +282,9 @@ where
 mod tests {
     #[test]
     fn test_headers() {
-        use bitcoin::blockdata::block::BlockHeader;
-        use bitcoin::hash_types::{BlockHash, TxMerkleNode};
-        use bitcoin::hashes::Hash;
+        use fujicoin::blockdata::block::BlockHeader;
+        use fujicoin::hash_types::{BlockHash, TxMerkleNode};
+        use fujicoin::hashes::Hash;
 
         use super::HeaderList;
 

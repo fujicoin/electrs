@@ -1,4 +1,4 @@
-use bitcoin::network::constants::Network;
+use fujicoin::network::constants::Network;
 use dirs_next::home_dir;
 use std::convert::TryInto;
 use std::ffi::{OsStr, OsString};
@@ -91,29 +91,29 @@ impl ResolvAddr {
 
 /// This newtype implements `ParseArg` for `Network`.
 #[derive(Deserialize)]
-pub struct BitcoinNetwork(Network);
+pub struct FujicoinNetwork(Network);
 
-impl Default for BitcoinNetwork {
+impl Default for FujicoinNetwork {
     fn default() -> Self {
-        BitcoinNetwork(Network::Bitcoin)
+        FujicoinNetwork(Network::Fujicoin)
     }
 }
 
-impl FromStr for BitcoinNetwork {
+impl FromStr for FujicoinNetwork {
     type Err = <Network as FromStr>::Err;
 
     fn from_str(string: &str) -> std::result::Result<Self, Self::Err> {
-        Network::from_str(string).map(BitcoinNetwork)
+        Network::from_str(string).map(FujicoinNetwork)
     }
 }
 
-impl ::configure_me::parse_arg::ParseArgFromStr for BitcoinNetwork {
+impl ::configure_me::parse_arg::ParseArgFromStr for FujicoinNetwork {
     fn describe_type<W: fmt::Write>(mut writer: W) -> std::fmt::Result {
-        write!(writer, "either 'bitcoin', 'testnet' or 'regtest'")
+        write!(writer, "either 'fujicoin', 'testnet' or 'regtest'")
     }
 }
 
-impl Into<Network> for BitcoinNetwork {
+impl Into<Network> for FujicoinNetwork {
     fn into(self) -> Network {
         self.0
     }
@@ -147,7 +147,7 @@ fn default_daemon_dir() -> PathBuf {
         eprintln!("Error: unknown home directory");
         std::process::exit(1)
     });
-    home.push(".bitcoin");
+    home.push(".fujicoin");
     home
 }
 
@@ -191,7 +191,7 @@ impl Config {
 
         let db_subdir = match config.network {
             // We must keep the name "mainnet" due to backwards compatibility
-            Network::Bitcoin => "mainnet",
+            Network::Fujicoin => "mainnet",
             Network::Testnet => "testnet",
             Network::Regtest => "regtest",
         };
@@ -199,17 +199,17 @@ impl Config {
         config.db_dir.push(db_subdir);
 
         let default_daemon_port = match config.network {
-            Network::Bitcoin => 8332,
+            Network::Fujicoin => 8332,
             Network::Testnet => 18332,
             Network::Regtest => 18443,
         };
         let default_electrum_port = match config.network {
-            Network::Bitcoin => 50001,
+            Network::Fujicoin => 50001,
             Network::Testnet => 60001,
             Network::Regtest => 60401,
         };
         let default_monitoring_port = match config.network {
-            Network::Bitcoin => 4224,
+            Network::Fujicoin => 4224,
             Network::Testnet => 14224,
             Network::Regtest => 24224,
         };
@@ -228,7 +228,7 @@ impl Config {
         );
 
         match config.network {
-            Network::Bitcoin => (),
+            Network::Fujicoin => (),
             Network::Testnet => config.daemon_dir.push("testnet3"),
             Network::Regtest => config.daemon_dir.push("regtest"),
         }

@@ -1,7 +1,7 @@
-use bitcoin::blockdata::block::{Block, BlockHeader};
-use bitcoin::blockdata::transaction::{Transaction, TxIn, TxOut};
-use bitcoin::consensus::encode::{deserialize, serialize};
-use bitcoin::hash_types::{BlockHash, Txid};
+use fujicoin::blockdata::block::{Block, BlockHeader};
+use fujicoin::blockdata::transaction::{Transaction, TxIn, TxOut};
+use fujicoin::consensus::encode::{deserialize, serialize};
+use fujicoin::hash_types::{BlockHash, Txid};
 use sha2::{Digest, Sha256};
 use std::collections::{HashMap, HashSet};
 use std::iter::FromIterator;

@@ -1,9 +1,9 @@
-use bitcoin::blockdata::transaction::Transaction;
-use bitcoin::consensus::encode::deserialize;
-use bitcoin::hash_types::{BlockHash, TxMerkleNode, Txid};
-use bitcoin::hashes::hex::ToHex;
-use bitcoin::hashes::sha256d::Hash as Sha256dHash;
-use bitcoin::hashes::Hash;
+use fujicoin::blockdata::transaction::Transaction;
+use fujicoin::consensus::encode::deserialize;
+use fujicoin::hash_types::{BlockHash, TxMerkleNode, Txid};
+use fujicoin::hashes::hex::ToHex;
+use fujicoin::hashes::sha256d::Hash as Sha256dHash;
+use fujicoin::hashes::Hash;
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 use std::collections::HashMap;
@@ -552,7 +552,7 @@ impl Query {
         self.tracker.read().unwrap().fee_histogram().clone()
     }
 
-    // Fee rate [BTC/kB] to be confirmed in `blocks` from now.
+    // Fee rate [FJC/kB] to be confirmed in `blocks` from now.
     pub fn estimate_fee(&self, blocks: usize) -> f64 {
         let mut total_vsize = 0u32;
         let mut last_fee_rate = 0.0;
@@ -564,7 +564,7 @@ impl Query {
                 break; // under-estimate the fee rate a bit
             }
         }
-        (last_fee_rate as f64) * 1e-5 // [BTC/kB] = 10^5 [sat/B]
+        (last_fee_rate as f64) * 1e-5 // [FJC/kB] = 10^5 [sat/B]
     }
 
     pub fn get_banner(&self) -> Result<String> {

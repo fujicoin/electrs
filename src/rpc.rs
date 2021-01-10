@@ -1,7 +1,7 @@
-use bitcoin::blockdata::transaction::Transaction;
-use bitcoin::consensus::encode::{deserialize, serialize};
-use bitcoin::hashes::hex::{FromHex, ToHex};
-use bitcoin::hashes::{sha256d::Hash as Sha256dHash, Hash};
+use fujicoin::blockdata::transaction::Transaction;
+use fujicoin::consensus::encode::{deserialize, serialize};
+use fujicoin::hashes::hex::{FromHex, ToHex};
+use fujicoin::hashes::{sha256d::Hash as Sha256dHash, Hash};
 use error_chain::ChainedError;
 use serde_json::{from_str, Value};
 use std::collections::HashMap;
@@ -212,12 +212,12 @@ impl Connection {
 
     fn blockchain_estimatefee(&self, params: &[Value]) -> Result<Value> {
         let blocks_count = usize_from_value(params.get(0), "blocks_count")?;
-        let fee_rate = self.query.estimate_fee(blocks_count); // in BTC/kB
+        let fee_rate = self.query.estimate_fee(blocks_count); // in FJC/kB
         Ok(json!(fee_rate.max(self.relayfee)))
     }
 
     fn blockchain_relayfee(&self) -> Result<Value> {
-        Ok(json!(self.relayfee)) // in BTC/kB
+        Ok(json!(self.relayfee)) // in FJC/kB
     }
 
     fn blockchain_scripthash_subscribe(&mut self, params: &[Value]) -> Result<Value> {

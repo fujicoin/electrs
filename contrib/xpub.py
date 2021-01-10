@@ -29,14 +29,14 @@ def main():
             confirmed = result['confirmed'] / 1e8
             total += confirmed
             if confirmed:
-                log.info('{}/{} => {} has {:11.8f} BTC',
+                log.info('{}/{} => {} has {:11.8f} FJC',
                          change, n, address, confirmed)
                 empty = 0
             else:
                 empty += 1
                 if empty >= 10:
                     break
-    log.info('total balance: {} BTC', total)
+    log.info('total balance: {} FJC', total)
 
 
 if __name__ == '__main__':

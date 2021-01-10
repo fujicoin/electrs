@@ -1,6 +1,6 @@
-use bitcoin::blockdata::block::Block;
-use bitcoin::consensus::encode::{deserialize, Decodable};
-use bitcoin::hash_types::BlockHash;
+use fujicoin::blockdata::block::Block;
+use fujicoin::consensus::encode::{deserialize, Decodable};
+use fujicoin::hash_types::BlockHash;
 use std::collections::HashSet;
 use std::fs;
 use std::io::Cursor;
@@ -264,7 +264,7 @@ pub fn index_blk_files(
 mod tests {
 
     use super::*;
-    use bitcoin::hashes::Hash;
+    use fujicoin::hashes::Hash;
     use hex::decode as hex_decode;
 
     #[test]

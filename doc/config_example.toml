@@ -8,24 +8,24 @@
 # This example contains only the most important settings.
 # See docs or electrs man page for advanced settings.
 
-# Set if you have low-memory device (such as RPi) or you run electrs under a different user than bitcoind and do NOT have sysperms in bitcoind.
+# Set if you have low-memory device (such as RPi) or you run electrs under a different user than fujicoind and do NOT have sysperms in fujicoind.
 jsonrpc_import = true
 
-# File where bitcoind stores the cookie, usually file .cookie in its datadir
-cookie_file = "/var/run/bitcoin-mainnet/cookie"
+# File where fujicoind stores the cookie, usually file .cookie in its datadir
+cookie_file = "/var/run/fujicoin-mainnet/cookie"
 
 # Prefer cookie file unless you have btc-rpc-proxy or a good reason to use username:password
 # cookie and cookie_file can NOT be specified at the same tie.
 # cookie = "username:password"
 
-# The listening address of bitcoind, port is usually 8332
+# The listening address of fujicoind, port is usually 8332
 daemon_rpc_addr = "127.0.0.1:8332"
 
 # Directory where the index should be stored. It should have at least 70GB of free space.
 db_dir = "/some/fast/storage/with/big/size"
 
-# bitcoin means mainnet. Don't set to anything else unless you're a developer.
-network = "bitcoin"
+# fujicoin means mainnet. Don't set to anything else unless you're a developer.
+network = "fujicoin"
 
 # The address on which electrs should listen. Warning: 0.0.0.0 is probably a bad idea!
 # Tunneling is the recommended way to access electrs remotely.
