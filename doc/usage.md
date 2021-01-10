@@ -8,7 +8,7 @@ Note for Raspberry Pi 4 owners: the old versions of OS/toolchains produce broken
 
 Install [recent Rust](https://rustup.rs/) (1.41.1+, `apt install cargo` is preferred for Debian 10),
 [latest Fujicoin Core](https://fujicoincore.org/en/download/) (0.16+)
-and [latest Electrum wallet](https://electrum.org/#download) (3.3+).
+and [latest Electrum-FJC wallet](https://www.fujicoin.org/downloads.php) (3.3+).
 
 Also, install the following packages (on Debian or Ubuntu):
 ```bash

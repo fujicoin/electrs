@@ -269,7 +269,7 @@ mod tests {
 
     #[test]
     fn test_incomplete_block_parsing() {
-        let magic = 0x0709110b;
+        let magic = 0x66756a69;
         let raw_blocks = hex_decode(fixture("incomplete_block.hex")).unwrap();
         let blocks = parse_blocks(raw_blocks, magic).unwrap();
         assert_eq!(blocks.len(), 2);

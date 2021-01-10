@@ -8,7 +8,7 @@ def main():
     parser.add_argument('txid')
     args = parser.parse_args()
 
-    d = daemon.Daemon(port=8332, cookie_dir='~/.fujicoin')
+    d = daemon.Daemon(port=3776, cookie_dir='~/.fujicoin')
     txid = args.txid
 
     txn, = d.request('getrawtransaction', [[txid, True]])
