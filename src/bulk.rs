@@ -270,12 +270,12 @@ pub fn index_blk_files(
 mod tests {
 
     use super::*;
-    use fujicoin_hashes::Hash;
+    use bitcoin_hashes::Hash;
     use hex::decode as hex_decode;
 
     #[test]
     fn test_incomplete_block_parsing() {
-        let magic = 0x0709110b;
+        let magic = 0x66756a69;
         let raw_blocks = hex_decode(fixture("incomplete_block.hex")).unwrap();
         let blocks = parse_blocks(raw_blocks, magic).unwrap();
         assert_eq!(blocks.len(), 2);
