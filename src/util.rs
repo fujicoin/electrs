@@ -287,7 +287,7 @@ mod tests {
         use fujicoin::blockdata::block::BlockHeader;
         use fujicoin::hash_types::{BlockHash, TxMerkleNode};
         use fujicoin::util::hash::FujicoinHash;
-        use fujicoin_hashes::Hash;
+        use bitcoin_hashes::Hash;
 
         use super::HeaderList;
 

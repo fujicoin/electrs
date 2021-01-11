@@ -270,7 +270,7 @@ pub fn index_blk_files(
 mod tests {
 
     use super::*;
-    use fujicoin_hashes::Hash;
+    use bitcoin_hashes::Hash;
     use hex::decode as hex_decode;
 
     #[test]

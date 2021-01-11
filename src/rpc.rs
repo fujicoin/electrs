@@ -1,7 +1,7 @@
 use fujicoin::blockdata::transaction::Transaction;
 use fujicoin::consensus::encode::{deserialize, serialize};
-use fujicoin_hashes::hex::{FromHex, ToHex};
-use fujicoin_hashes::{sha256d::Hash as Sha256dHash, Hash};
+use bitcoin_hashes::hex::{FromHex, ToHex};
+use bitcoin_hashes::{sha256d::Hash as Sha256dHash, Hash};
 use error_chain::ChainedError;
 use hex;
 use serde_json::{from_str, Value};
