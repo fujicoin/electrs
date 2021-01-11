@@ -1,9 +1,9 @@
 use crate::errors::*;
 use crate::metrics::{CounterVec, MetricOpts, Metrics};
 
-use bitcoin::blockdata::transaction::Transaction;
-use bitcoin::consensus::encode::deserialize;
-use bitcoin::hash_types::{BlockHash, Txid};
+use fujicoin::blockdata::transaction::Transaction;
+use fujicoin::consensus::encode::deserialize;
+use fujicoin::hash_types::{BlockHash, Txid};
 use lru::LruCache;
 use prometheus::IntGauge;
 use std::hash::Hash;
@@ -148,7 +148,7 @@ impl TransactionCache {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use bitcoin_hashes::Hash;
+    use fujicoin_hashes::Hash;
 
     #[test]
     fn test_sized_lru_cache_hit_and_miss() {
