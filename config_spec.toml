@@ -63,7 +63,7 @@ doc = "Electrum server JSONRPC 'addr:port' to listen on (default: '127.0.0.1:500
 [[param]]
 name = "daemon_rpc_addr"
 type = "crate::config::ResolvAddr"
-doc = "Fujicoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:8332 for mainnet, 127.0.0.1:18332 for testnet and 127.0.0.1:18443 for regtest)"
+doc = "Fujicoin daemon JSONRPC 'addr:port' to connect (default: 127.0.0.1:3776 for mainnet, 127.0.0.1:13776 for testnet and 127.0.0.1:16776 for regtest)"
 
 [[param]]
 name = "monitoring_addr"

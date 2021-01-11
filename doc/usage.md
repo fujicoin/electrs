@@ -5,8 +5,8 @@
 ### Build dependencies
 
 Install [recent Rust](https://rustup.rs/) (1.34+, `apt install cargo` is preferred for Debian 10),
-[latest Fujicoin Core](https://fujicoincore.org/en/download/) (0.16+)
-and [latest Electrum wallet](https://electrum.org/#download) (3.3+).
+[latest Fujicoin Core](https://www.fujicoin.org/downloads.php/) (0.16+)
+and [latest Electrum-FJC wallet](https://www.fujicoin.org/downloads.php/) (3.3+).
 
 Also, install the following packages (on Debian):
 ```bash
@@ -22,7 +22,7 @@ Optionally, you may install [`cfg_me`](https://github.com/Kixunil/cfg_me) tool f
 
 First build should take ~20 minutes:
 ```bash
-$ git clone https://github.com/romanz/electrs
+$ git clone https://github.com/fujicoin/electrs.git
 $ cd electrs
 $ cargo build --release
 ```
