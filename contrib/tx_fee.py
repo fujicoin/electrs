@@ -8,7 +8,7 @@ def main():
     parser.add_argument('txid')
     args = parser.parse_args()
 
-    d = daemon.Daemon(port=8332, cookie_dir='~/.bitcoin')
+    d = daemon.Daemon(port=8332, cookie_dir='~/.fujicoin')
     txid = args.txid
 
     txn, = d.request('getrawtransaction', [[txid, True]])
@@ -27,7 +27,7 @@ def main():
         print(f"{txid}:{i:<5} {-txo['value']:+20.8f}")
         fee -= txo['value']
 
-    print(f"Fee = {1e6 * fee:.2f} uBTC = {1e8 * fee / txn['vsize']:.2f} sat/vB")
+    print(f"Fee = {1e6 * fee:.2f} uFJC = {1e8 * fee / txn['vsize']:.2f} sat/vB")
 
 if __name__ == '__main__':
     main()

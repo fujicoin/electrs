@@ -1,11 +1,11 @@
 use base64;
-use bitcoin::blockdata::block::{Block, BlockHeader};
-use bitcoin::blockdata::transaction::Transaction;
-use bitcoin::consensus::encode::{deserialize, serialize};
-use bitcoin::hash_types::{BlockHash, Txid};
-use bitcoin::network::constants::Network;
-use bitcoin_hashes::hex::{FromHex, ToHex};
-use bitcoin_hashes::Hash;
+use fujicoin::blockdata::block::{Block, BlockHeader};
+use fujicoin::blockdata::transaction::Transaction;
+use fujicoin::consensus::encode::{deserialize, serialize};
+use fujicoin::hash_types::{BlockHash, Txid};
+use fujicoin::network::constants::Network;
+use fujicoin_hashes::hex::{FromHex, ToHex};
+use fujicoin_hashes::Hash;
 use glob;
 use hex;
 use serde_json::{from_str, from_value, Map, Value};
@@ -22,7 +22,7 @@ use crate::errors::*;
 use crate::metrics::{HistogramOpts, HistogramVec, Metrics};
 use crate::signal::Waiter;
 use crate::util::HeaderList;
-use bitcoin::BitcoinHash;
+use fujicoin::FujicoinHash;
 
 fn parse_hash<T: Hash>(value: &Value) -> Result<T> {
     Ok(T::from_hex(
@@ -115,7 +115,7 @@ struct BlockchainInfo {
 struct NetworkInfo {
     version: u64,
     subversion: String,
-    relayfee: f64, // in BTC
+    relayfee: f64, // in FJC
 }
 
 pub struct MempoolEntry {
@@ -324,12 +324,12 @@ impl Daemon {
             blocktxids_cache: blocktxids_cache,
             signal: signal.clone(),
             latency: metrics.histogram_vec(
-                HistogramOpts::new("electrs_daemon_rpc", "Bitcoind RPC latency (in seconds)"),
+                HistogramOpts::new("electrs_daemon_rpc", "Fujicoind RPC latency (in seconds)"),
                 &["method"],
             ),
             // TODO: use better buckets (e.g. 1 byte to 10MB).
             size: metrics.histogram_vec(
-                HistogramOpts::new("electrs_daemon_bytes", "Bitcoind RPC size (in bytes)"),
+                HistogramOpts::new("electrs_daemon_bytes", "Fujicoind RPC size (in bytes)"),
                 &["method", "dir"],
             ),
         };
@@ -337,14 +337,14 @@ impl Daemon {
         info!("{:?}", network_info);
         if network_info.version < 16_00_00 {
             bail!(
-                "{} is not supported - please use bitcoind 0.16+",
+                "{} is not supported - please use fujicoind 0.16+",
                 network_info.subversion,
             )
         }
         let blockchain_info = daemon.getblockchaininfo()?;
         info!("{:?}", blockchain_info);
         if blockchain_info.pruned {
-            bail!("pruned node is not supported (use '-prune=0' bitcoind flag)".to_owned())
+            bail!("pruned node is not supported (use '-prune=0' fujicoind flag)".to_owned())
         }
         loop {
             let info = daemon.getblockchaininfo()?;
@@ -427,7 +427,7 @@ impl Daemon {
         loop {
             match self.handle_request_batch(method, params_list) {
                 Err(Error(ErrorKind::Connection(msg), _)) => {
-                    warn!("reconnecting to bitcoind: {}", msg);
+                    warn!("reconnecting to fujicoind: {}", msg);
                     self.signal.wait(Duration::from_secs(3))?;
                     let mut conn = self.conn.lock().unwrap();
                     *conn = conn.reconnect()?;
@@ -448,7 +448,7 @@ impl Daemon {
         self.retry_request_batch(method, params_list)
     }
 
-    // bitcoind JSONRPC API:
+    // fujicoind JSONRPC API:
 
     fn getblockchaininfo(&self) -> Result<BlockchainInfo> {
         let info: Value = self.request("getblockchaininfo", json!([]))?;
@@ -497,7 +497,7 @@ impl Daemon {
         let block = block_from_value(
             self.request("getblock", json!([blockhash.to_hex(), /*verbose=*/ false]))?,
         )?;
-        assert_eq!(block.bitcoin_hash(), *blockhash);
+        assert_eq!(block.fujicoin_hash(), *blockhash);
         Ok(block)
     }
 
@@ -589,7 +589,7 @@ impl Daemon {
             * 100_000_000f64) as u64;
         let vsize = entry
             .get("size")
-            .or_else(|| entry.get("vsize")) // (https://github.com/bitcoin/bitcoin/pull/15637)
+            .or_else(|| entry.get("vsize")) // (https://github.com/fujicoin/fujicoin/pull/15637)
             .chain_err(|| "missing vsize")?
             .as_u64()
             .chain_err(|| "non-integer vsize")? as u32;
@@ -626,7 +626,7 @@ impl Daemon {
         let mut blockhash = null_hash;
         for header in &result {
             assert_eq!(header.prev_blockhash, blockhash);
-            blockhash = header.bitcoin_hash();
+            blockhash = header.fujicoin_hash();
         }
         assert_eq!(blockhash, *tip);
         Ok(result)

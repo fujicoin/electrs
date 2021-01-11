@@ -61,7 +61,7 @@ fn run_server(config: &Config) -> Result<()> {
     let tx_cache = TransactionCache::new(config.tx_cache_size, &metrics);
     let query = Query::new(app.clone(), &metrics, tx_cache, config.txid_limit);
     let relayfee = query.get_relayfee()?;
-    debug!("relayfee: {} BTC", relayfee);
+    debug!("relayfee: {} FJC", relayfee);
 
     let mut server = None; // Electrum RPC server
     loop {

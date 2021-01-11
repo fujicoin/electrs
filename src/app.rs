@@ -1,4 +1,4 @@
-use bitcoin::hash_types::BlockHash;
+use fujicoin::hash_types::BlockHash;
 use std::sync::{Arc, Mutex};
 
 use crate::{config::Config, daemon, errors::*, index, signal::Waiter, store};
